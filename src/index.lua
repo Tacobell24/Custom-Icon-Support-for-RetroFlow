@@ -8954,8 +8954,28 @@ function xAppIconPathLookup(AppTypeNum)
         else
             return "app0:/DATA/icon_psv.png"
         end
-    elseif apptype==2   then return "app0:/DATA/icon_psp.png"
-    elseif apptype==3   then return "app0:/DATA/icon_psx.png"
+    elseif apptype==2   then         
+        -- PSP custom icon override (by TITLEID)
+        local titleid = xCatLookup(showCat)[p].titleid
+
+        if titleid and System.doesFileExist(
+            iconDir .. "Sony - PlayStation Portable/" .. titleid .. ".png"
+        ) then
+            return iconDir .. "Sony - PlayStation Portable/" .. titleid .. ".png"
+        else
+            return "app0:/DATA/icon_psp.png"
+        end
+    elseif apptype==3   then         
+        -- PSX custom icon override (by TITLEID)
+        local titleid = xCatLookup(showCat)[p].titleid
+
+        if titleid and System.doesFileExist(
+            iconDir .. "Sony - PlayStation/" .. titleid .. ".png"
+        ) then
+            return iconDir .. "Sony - PlayStation/" .. titleid .. ".png"
+        else
+            return "app0:/DATA/icon_psx.png"
+        end
     elseif apptype==5   then return "app0:/DATA/icon_n64.png"
     elseif apptype==6   then return "app0:/DATA/icon_snes.png"
     elseif apptype==7   then return "app0:/DATA/icon_nes.png"
